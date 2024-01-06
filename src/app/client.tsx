@@ -15,17 +15,22 @@ import {
 } from "@/components/ui/carousel";
 import { Heading, Paragraph } from "@/components/ui/typography";
 import { cn } from "@/lib/utils";
-import { categoryAtom, vehicleNameAtom, wishlistAtom } from "@/store";
+import { categoryAtom } from "@/store";
 import { CarTypeProps, ListVehiclesProps } from "@/types";
-import { useAtom } from "jotai";
+import { atom, useAtom } from "jotai";
 import { HeartIcon } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
-import { useEffect } from "react";
-import slugify from "slugify";
+import { useMemo } from "react";
 
-export default function Client({ vehicles }: { vehicles: ListVehiclesProps }) {
+export default function Client(
+  { vehicles: data }: { vehicles: ListVehiclesProps }
+) {
+  const vehiclesAtom = useMemo(() => atom<ListVehiclesProps>(data), [data]);
+
   const [category, setCategory] = useAtom(categoryAtom);
+  const [vehicles, setVehicles] = useAtom(vehiclesAtom);
+
+  console.log(vehicles);
 
   return (
     <>
@@ -79,7 +84,7 @@ export default function Client({ vehicles }: { vehicles: ListVehiclesProps }) {
                 </Paragraph>
                 <Carousel className="mt-3">
                   <CarouselContent>
-                    {item.car_type.map((item, index) => (
+                    {item.car_type.map((item) => (
                       <CarouselItem key={item.vehicle} className="md:basis-1/2">
                         {/*<Link
                           href={`/vehicle/${slugify(item.vehicle, {
@@ -114,6 +119,7 @@ export default function Client({ vehicles }: { vehicles: ListVehiclesProps }) {
                                 imageURL: item.imageURL,
                                 price: item.price,
                               }}
+                              vehicles={vehicles}
                             />
                           </CardFooter>
                         </Card>
@@ -132,30 +138,24 @@ export default function Client({ vehicles }: { vehicles: ListVehiclesProps }) {
   );
 }
 
-export function HeartButton({ data }: { data: CarTypeProps }) {
-  const [wishlist, setWishlist] = useAtom(wishlistAtom);
-  const [vehicleName, setVehicleName] = useAtom(vehicleNameAtom);
+export function HeartButton(
+  { data, vehicles }: { data: CarTypeProps; vehicles: ListVehiclesProps }
+) {
+  /*function handleClick() {
+    const newData = vehicles.type.map((item) => item.car_type);
 
-  function handleClick() {
-    const list = [...wishlist];
-    list.push({ ...data, status: true });
+    const list = [...newData];
+    list.push();
 
-    setWishlist(list);
+    console.log(list);
+
+    // setVehicles(list);
     localStorage.setItem("list", JSON.stringify(list));
-  }
-
-  useEffect(() => {
-    if (localStorage.getItem("list")) {
-      setWishlist(JSON.parse(localStorage.getItem("list") || ""));
-    }
-  }, [setWishlist]);
+  }*/
 
   return (
-    <button onClick={handleClick}>
-      <HeartIcon
-        size={23}
-        className={cn(vehicleName === data.vehicle ? "bg-red-500" : "")}
-      />
+    <button type="button" aria-label="like">
+      <HeartIcon size={23} />
     </button>
   );
 }

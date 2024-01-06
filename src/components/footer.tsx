@@ -8,7 +8,7 @@ export default function Footer() {
   return (
     <footer
       className={cn(
-        "w-full flex justify-center px-4 py-3",
+        "w-full flex justify-center px-4 py-10",
         "items-center border-t border-slate-300"
       )}
     >

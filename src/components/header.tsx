@@ -22,9 +22,9 @@ export default function Header() {
       {scroll < 20 ? (
         <header
           className={cn(
-            "fixed z-50 top-0 bg-white/70",
+            "fixed z-50 top-0 bg-white/90",
             "flex justify-center px-4 py-3 items-center",
-            "border-b border-slate-300 backdrop-blur-lg w-full"
+            "backdrop-blur-lg w-full"
           )}
         >
           <nav className="w-full max-w-7xl flex justify-between items-center">
