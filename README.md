@@ -2,7 +2,7 @@
 
 - Name: Haikel Ilham Hakim
 - College: ISB Atma Luhur
-- Major Informatics Engineering
+- Major: Informatics Engineering
 
 ## Task
 

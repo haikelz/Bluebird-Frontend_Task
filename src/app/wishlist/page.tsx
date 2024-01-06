@@ -1,7 +1,9 @@
 export default function Page() {
   return (
-    <div>
-      <div></div>
-    </div>
+    <main className="flex justify-center items-center w-full flex-col">
+      <section className="max-w-7xl">
+        <div className="flex flex-col"></div>
+      </section>
+    </main>
   );
 }

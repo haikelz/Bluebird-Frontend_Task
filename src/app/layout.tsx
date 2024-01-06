@@ -1,3 +1,5 @@
+import Footer from "@/components/footer";
+import Header from "@/components/header";
 import { ChildrenProps } from "@/types";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -14,9 +16,9 @@ export default function RootLayout({ children }: ChildrenProps) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <main className="w-full flex justify-center items-center flex-col">
-          {children}
-        </main>
+        <Header />
+        <div className="w-full p-4 pt-20 pb-14 min-h-screen">{children}</div>
+        <Footer />
       </body>
     </html>
   );
