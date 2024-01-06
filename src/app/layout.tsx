@@ -3,6 +3,7 @@ import Header from "@/components/header";
 import { ChildrenProps } from "@/types";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -17,7 +18,7 @@ export default function RootLayout({ children }: ChildrenProps) {
     <html lang="en">
       <body className={inter.className}>
         <Header />
-        <div className="w-full p-4 pt-20 pb-14 min-h-screen">{children}</div>
+        <div className="w-full p-4 pt-24 pb-14 min-h-screen">{children}</div>
         <Footer />
       </body>
     </html>

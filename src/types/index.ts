@@ -27,3 +27,5 @@ export type CarTypeProps = {
   price: string;
   description: string[];
 };
+
+export type LikedVehiclesAtomProps = CarTypeProps & { status: boolean };

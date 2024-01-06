@@ -1,9 +1,18 @@
 "use client";
 
+import { useScroll } from "@/hooks";
+import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
+
+import { Button } from "./ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
 import { Input } from "./ui/input";
-import { useScroll } from "@/hooks/use-scroll";
 
 export default function Header() {
   const scroll = useScroll();
@@ -11,7 +20,13 @@ export default function Header() {
   return (
     <>
       {scroll < 20 ? (
-        <header className="fixed z-50 top-0 bg-white/70 flex justify-center px-4 py-3 items-center border-b border-slate-300 backdrop-blur-lg w-full">
+        <header
+          className={cn(
+            "fixed z-50 top-0 bg-white/70",
+            "flex justify-center px-4 py-3 items-center",
+            "border-b border-slate-300 backdrop-blur-lg w-full"
+          )}
+        >
           <nav className="w-full max-w-7xl flex justify-between items-center">
             <Link href="/">
               <button type="button" aria-label="home">
@@ -23,7 +38,7 @@ export default function Header() {
                 />
               </button>
             </Link>
-            <ul className="flex space-x-6 justify-center items-center">
+            <ul className="md:flex hidden space-x-6 justify-center items-center">
               <li>
                 <Link href="/wishlist" className="font-semibold">
                   Wishlist
@@ -38,6 +53,20 @@ export default function Header() {
                 <Input type="text" placeholder="Search...." />
               </li>
             </ul>
+            <div className="block md:hidden">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button className="font-bold">Menu</Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem>Wishlist</DropdownMenuItem>
+                  <DropdownMenuItem>My Book</DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Input type="text" placeholder="Search...." />
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
           </nav>
         </header>
       ) : null}
