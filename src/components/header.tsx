@@ -4,6 +4,7 @@ import { useScroll } from "@/hooks";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 import { Button } from "./ui/button";
 import {
@@ -16,13 +17,14 @@ import { Input } from "./ui/input";
 
 export default function Header() {
   const scroll = useScroll();
+  const pathname = usePathname();
 
   return (
     <>
       {scroll < 20 ? (
         <header
           className={cn(
-            "fixed z-50 top-0 bg-white/90",
+            "fixed z-50 top-0 bg-white",
             "flex justify-center px-4 py-3 items-center",
             "backdrop-blur-lg w-full"
           )}
@@ -38,14 +40,30 @@ export default function Header() {
                 />
               </button>
             </Link>
-            <ul className="md:flex hidden space-x-6 justify-center items-center">
+            <ul className="md:flex hidden space-x-8 justify-center items-center">
               <li>
-                <Link href="/wishlist" className="font-semibold">
+                <Link
+                  href="/wishlist"
+                  className={cn(
+                    "font-bold",
+                    pathname === "/wishlist"
+                      ? "underline underline-offset-4"
+                      : ""
+                  )}
+                >
                   Wishlist
                 </Link>
               </li>
               <li>
-                <Link href="/my-book" className="font-semibold">
+                <Link
+                  href="/my-book"
+                  className={cn(
+                    "font-bold",
+                    pathname === "/my-book"
+                      ? "underline underline-offset-4"
+                      : ""
+                  )}
+                >
                   My Book
                 </Link>
               </li>

@@ -32,7 +32,7 @@ export default function Footer() {
           </Paragraph>
         </div>
         <div className="mt-6 md:mt-0">
-          <Heading as="h3">Navigation</Heading>
+          <Heading as="h3">Navigations</Heading>
           <ul className="flex space-y-2 flex-col mt-4">
             <li>
               <Link

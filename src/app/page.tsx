@@ -17,9 +17,14 @@ export default async function Page() {
     <main className="flex justify-center items-center w-full flex-col">
       <section className="w-full">
         <div className="min-h-screen flex justify-center flex-col px-10 w-full items-center md:items-start bg-banner bg-cover bg-no-repeat saturate-50">
-          <h1 className="text-white font-black text-7xl">Bluebird</h1>
+          <h1
+            className="text-white font-black text-7xl"
+            data-testid="bluebird-heading"
+          >
+            Bluebird
+          </h1>
           <Paragraph className="text-white text-center text-2xl font-medium">
-            Jadikan perjalananmu lebih bermakna
+            Jadikan perjalananmu lebih bermakna dan menyenangkan
           </Paragraph>
         </div>
       </section>

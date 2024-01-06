@@ -20,7 +20,9 @@ import { CarTypeProps, ListVehiclesProps } from "@/types";
 import { atom, useAtom } from "jotai";
 import { HeartIcon } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useMemo } from "react";
+import slugify from "slugify";
 
 export default function Client(
   { vehicles: data }: { vehicles: ListVehiclesProps }
@@ -34,16 +36,21 @@ export default function Client(
 
   return (
     <>
-      <div className="flex justify-center items-center space-x-14">
+      <div className="w-full flex justify-start flex-col">
+        <Heading as="h2">Daftar Mobil</Heading>
+        <Paragraph>
+          Berikut adalah daftar mobil yang tersedia dan siap disewakan:
+        </Paragraph>
+      </div>
+      <div className="flex justify-center items-center space-x-14 my-14">
         {vehicles.category.map((item) => (
           <div
             key={item.id}
             onClick={() => setCategory(item.id)}
             role="button"
             className={cn(
-              category === item.id
-                ? "bg-slate-50 drop-shadow-md p-4 rounded-lg"
-                : ""
+              "hover:bg-slate-50 transition-all p-4 rounded-lg",
+              category === item.id ? "bg-slate-50 drop-shadow-md" : ""
             )}
           >
             {/* There is a wrong url in index 0 when i get the data from API.
@@ -62,77 +69,76 @@ export default function Client(
           </div>
         ))}
       </div>
-      <div className="mt-14">
-        <div>
-          <Heading as="h2">Daftar Mobil</Heading>
-          <Paragraph>
-            Berikut adalah daftar mobil yang tersedia dan siap disewakan:
-          </Paragraph>
-        </div>
-        <div className="flex flex-col">
-          {vehicles.type
-            .sort((a, b) => {
-              if (a.category_id > b.category_id) return 1;
-              if (a.category_id < b.category_id) return -1;
-              return 0;
-            })
-            .filter((item) => item.category_id === category)
-            .map((item) => (
-              <div key={item.id} className="mt-8">
-                <Paragraph className="font-bold text-xl">
-                  Kategori {item.category_id}:{" "}
-                </Paragraph>
-                <Carousel className="mt-3">
-                  <CarouselContent>
-                    {item.car_type.map((item) => (
-                      <CarouselItem key={item.vehicle} className="md:basis-1/2">
-                        {/*<Link
+      <div className="flex flex-col">
+        {vehicles.type
+          .sort((a, b) => {
+            if (a.category_id > b.category_id) return 1;
+            if (a.category_id < b.category_id) return -1;
+            return 0;
+          })
+          .filter((item) => item.category_id === category)
+          .map((item) => (
+            <div key={item.id} className="mt-8">
+              <Paragraph className="font-bold text-xl">
+                Kategori {item.category_id}:{" "}
+              </Paragraph>
+              <Carousel className="mt-3">
+                <CarouselContent>
+                  {item.car_type.map((item) => (
+                    <CarouselItem key={item.vehicle} className="md:basis-1/2">
+                      {/*<Link
                           href={`/vehicle/${slugify(item.vehicle, {
                             lower: true,
                           })}`}
                         >*/}
-                        <Card>
-                          <CardHeader className="w-full">
-                            <Image
-                              className="hover:scale-105 md:w-full max-w-full min-w-[200px] transition-all cursor-pointer"
-                              src={item.imageURL}
-                              width={200}
-                              height={200}
-                              alt={item.vehicle}
-                            />
-                          </CardHeader>
-                          <CardContent>
+                      <Card className="h-fit">
+                        <CardHeader className="w-full">
+                          <Image
+                            className="hover:scale-105 md:w-full max-w-full min-w-[200px] transition-all cursor-pointer"
+                            src={item.imageURL}
+                            width={200}
+                            height={200}
+                            alt={item.vehicle}
+                          />
+                        </CardHeader>
+                        <CardContent>
+                          <Link
+                            href={`/vehicle/${slugify(item.imageURL, {
+                              lower: true,
+                            })}`}
+                            className="hover:text-blue-500 transition-all"
+                          >
                             <Heading as="h3">{item.vehicle}</Heading>
-                            <Paragraph className="">
-                              <span className="font-semibold">Deskripsi: </span>
-                              {item.description.join(", ")}
-                            </Paragraph>
-                          </CardContent>
-                          <CardFooter className="flex justify-between items-center">
-                            <Paragraph className="font-semibold">
-                              {item.price}
-                            </Paragraph>
-                            <HeartButton
-                              data={{
-                                description: item.description,
-                                vehicle: item.vehicle,
-                                imageURL: item.imageURL,
-                                price: item.price,
-                              }}
-                              vehicles={vehicles}
-                            />
-                          </CardFooter>
-                        </Card>
-                        {/*</Link>*/}
-                      </CarouselItem>
-                    ))}
-                  </CarouselContent>
-                  <CarouselNext />
-                  <CarouselPrevious />
-                </Carousel>
-              </div>
-            ))}
-        </div>
+                          </Link>
+                          <Paragraph className="line-clamp-2">
+                            <span className="font-semibold">Deskripsi: </span>
+                            {item.description.join(", ")}
+                          </Paragraph>
+                        </CardContent>
+                        <CardFooter className="flex justify-between items-center">
+                          <Paragraph className="font-semibold">
+                            {item.price}
+                          </Paragraph>
+                          <HeartButton
+                            data={{
+                              description: item.description,
+                              vehicle: item.vehicle,
+                              imageURL: item.imageURL,
+                              price: item.price,
+                            }}
+                            vehicles={vehicles}
+                          />
+                        </CardFooter>
+                      </Card>
+                      {/*</Link>*/}
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <CarouselNext />
+                <CarouselPrevious />
+              </Carousel>
+            </div>
+          ))}
       </div>
     </>
   );
