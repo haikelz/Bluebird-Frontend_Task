@@ -1,5 +1,7 @@
 import { Heading, Paragraph } from "@/components/ui/typography";
 
+import Client from "./client";
+
 export default function Page() {
   return (
     <main className="flex justify-center items-center w-full flex-col">
@@ -10,7 +12,7 @@ export default function Page() {
             Berikut daftar jasa armada yang telah kamu pesan
           </Paragraph>
         </div>
-        <div className="grid grid-cols-3 grid-rows-1"></div>
+        <Client />
       </section>
     </main>
   );
