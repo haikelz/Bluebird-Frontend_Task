@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -10,11 +11,10 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Heading, Paragraph } from "@/components/ui/typography";
-import { categoryAtom } from "@/store";
+import { cn } from "@/lib/utils";
+import { bookAtom, categoryAtom } from "@/store";
 import { CarTypeProps, ListVehiclesProps } from "@/types";
 import { useAtom } from "jotai";
 import { HeartIcon } from "lucide-react";
@@ -24,6 +24,15 @@ import slugify from "slugify";
 
 export default function Client({ vehicles }: { vehicles: ListVehiclesProps }) {
   const [category, setCategory] = useAtom(categoryAtom);
+  const [book, setBook] = useAtom(bookAtom);
+
+  function handleBook(item: CarTypeProps) {
+    const data = [...book];
+    data.push(item);
+
+    setBook(data);
+    localStorage.setItem("my-book", JSON.stringify(data));
+  }
 
   return (
     <>
@@ -33,34 +42,39 @@ export default function Client({ vehicles }: { vehicles: ListVehiclesProps }) {
           Berikut adalah daftar mobil yang tersedia dan siap disewakan:
         </Paragraph>
       </div>
-      {/*<div className="flex justify-center items-center space-x-14 my-14">
-        {vehicles.category.map((item) => (
-          <div
-            key={item.id}
-            onClick={() => setCategory(item.id)}
-            role="button"
-            className={cn(
-              "hover:bg-slate-50 transition-all p-4 rounded-lg",
-              category === item.id ? "bg-slate-50 drop-shadow-md" : ""
-            )}
-          >
-            {/* There is a wrong url in index 0 when i get the data from API.
-             * So to prevent this problem, i split the URL to array and join it.
-
-            <Image
-              src={item.imageURL.replace(" ", "")}
-              alt={item.name}
-              width={100}
-              height={100}
-              className="min-w-[100px] h-auto w-full max-w-full"
-            />
-            <Paragraph key={item.id} className="font-bold mt-4">
-              {item.name}
-            </Paragraph>
-          </div>
-        ))}
-        </div>
-      */}
+      <Carousel className="max-w-sm w-full">
+        <CarouselContent className="space-x-6 p-4">
+          {vehicles.category.map((item) => (
+            <CarouselItem
+              key={item.id}
+              onClick={() => setCategory(item.id)}
+              role="button"
+              className="basis-1/2"
+            >
+              {/* There is a wrong url in index 0 when i get the data from API.
+               * So to prevent this problem, i split the URL to array and join it.
+               */}
+              <div
+                className={cn(
+                  "hover:bg-slate-50 p-4 rounded-lg transition-all hover:drop-shadow-md",
+                  category === item.id ? "bg-slate-50 drop-shadow-md" : ""
+                )}
+              >
+                <Image
+                  src={item.imageURL.replace(" ", "")}
+                  alt={item.name}
+                  width={100}
+                  height={100}
+                  className="min-w-[100px] h-auto w-full max-w-full"
+                />
+                <Paragraph key={item.id} className="font-bold mt-4">
+                  {item.name}
+                </Paragraph>
+              </div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+      </Carousel>
       <div className="flex flex-col">
         {vehicles.type
           .sort((a, b) => {
@@ -81,7 +95,10 @@ export default function Client({ vehicles }: { vehicles: ListVehiclesProps }) {
                       <Card className="h-fit">
                         <CardHeader className="w-full">
                           <Image
-                            className="hover:scale-105 md:w-full max-w-full min-w-[200px] transition-all cursor-pointer"
+                            className={cn(
+                              "hover:scale-105 md:w-full max-w-full",
+                              "min-w-[200px] transition-all cursor-pointer"
+                            )}
                             src={item.imageURL}
                             width={200}
                             height={200}
@@ -90,7 +107,7 @@ export default function Client({ vehicles }: { vehicles: ListVehiclesProps }) {
                         </CardHeader>
                         <CardContent>
                           <Link
-                            href={`/vehicle/${slugify(item.imageURL, {
+                            href={`/vehicle/${slugify(item.vehicle, {
                               lower: true,
                             })}`}
                             className="hover:text-blue-500 transition-all"
@@ -106,22 +123,25 @@ export default function Client({ vehicles }: { vehicles: ListVehiclesProps }) {
                           <Paragraph className="font-semibold">
                             {item.price}
                           </Paragraph>
-                          <HeartButton
-                            data={{
-                              description: item.description,
-                              vehicle: item.vehicle,
-                              imageURL: item.imageURL,
-                              price: item.price,
-                            }}
-                            vehicles={vehicles}
-                          />
+                          <div className="flex space-x-6 items-center">
+                            <HeartButton
+                              data={{
+                                description: item.description,
+                                vehicle: item.vehicle,
+                                imageURL: item.imageURL,
+                                price: item.price,
+                              }}
+                              vehicles={vehicles}
+                            />
+                            <Button onClick={() => handleBook(item)}>
+                              Book
+                            </Button>
+                          </div>
                         </CardFooter>
                       </Card>
                     </CarouselItem>
                   ))}
                 </CarouselContent>
-                <CarouselNext />
-                <CarouselPrevious />
               </Carousel>
             </div>
           ))}

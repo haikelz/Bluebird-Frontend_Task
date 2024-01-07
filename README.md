@@ -21,14 +21,53 @@ In this test, i use:
 - Tailwind CSS for CSS Framework.
 - Shadcn/ui for UI Components(since the deadline is only 2x24, i want to focusing more on finishing requested features).
 - Jotai for State Management.
-- Jest and Enzyme for Testing.
 - Both SSR and CSR techniques.
 
+Actually, i want to implement testing, but
+
 ## Folder Structure
+
+```sh
+├── components.json
+├── next.config.js
+├── package.json
+├── pnpm-lock.yaml
+├── postcss.config.js
+├── prettier.config.js
+├── public
+│   └── images
+├── README.md
+├── src
+│   ├── app
+│   │   ├── favicon.ico
+│   │   ├── my-book
+│   │   ├── search
+│   │   ├── vehicle
+│   │   │   └── [slug]
+│   │   └── wishlist
+│   ├── components
+│   │   └── ui
+│   │       └── typography
+│   ├── features
+│   ├── hooks
+│   ├── lib
+│   ├── store
+│   └── types
+├── __tests__
+│   ├── home
+│   ├── my-book
+│   ├── search
+│   ├── vehicle
+│   └── wishlist
+├── tsconfig.json
+└── turbo.json
+```
+
+## Screenshots
 
 Soon
 
 ## Preview
 
-- [Website]()
+- [Website](https://bluebird-frontend-task-haikelilhamhakim.vercel.app)
 - [Repository](https://github.com/haikelz/Bluebird-Frontend_Task)

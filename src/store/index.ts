@@ -7,4 +7,5 @@ export const scrollAtom = atom<number>(0);
 export const wishlistAtom = atom<LikedVehiclesAtomProps[]>([]);
 
 export const categoryAtom = atom<number>(1);
-export const vehicleNameAtom = atom<string>("");
+export const searchAtom = atom<string>("");
+export const bookAtom = atom<CarTypeProps[]>([]);
