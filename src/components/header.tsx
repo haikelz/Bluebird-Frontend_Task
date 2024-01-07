@@ -2,9 +2,12 @@
 
 import { useScroll } from "@/hooks";
 import { cn } from "@/lib/utils";
+import { searchAtom } from "@/store";
+import { useSetAtom } from "jotai";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useRef } from "react";
 
 import { Button } from "./ui/button";
 import {
@@ -16,17 +19,21 @@ import {
 import { Input } from "./ui/input";
 
 export default function Header() {
-  const scroll = useScroll();
+  const setSearch = useSetAtom(searchAtom);
   const pathname = usePathname();
+
+  const headerRef = useRef<HTMLDivElement>(null);
+  const { show } = useScroll(headerRef);
 
   return (
     <>
-      {scroll < 20 ? (
+      {show ? (
         <header
+          ref={headerRef}
           className={cn(
-            "fixed z-50 top-0 bg-white",
+            "fixed z-50 top-0 bg-white border-b border-b-slate-300",
             "flex justify-center px-4 py-3 items-center",
-            "backdrop-blur-lg w-full"
+            "w-full"
           )}
         >
           <nav className="w-full max-w-7xl flex justify-between items-center">
@@ -80,7 +87,11 @@ export default function Header() {
                   <DropdownMenuItem>Wishlist</DropdownMenuItem>
                   <DropdownMenuItem>My Book</DropdownMenuItem>
                   <DropdownMenuItem asChild>
-                    <Input type="text" placeholder="Search...." />
+                    <Input
+                      type="text"
+                      placeholder="Search...."
+                      onChange={(e) => setSearch(e.target.value)}
+                    />
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>

@@ -58,14 +58,6 @@ export default function Footer() {
                 My Book
               </Link>
             </li>
-            <li>
-              <Link
-                href="/search"
-                className="font-medium hover:underline underline-offset-2"
-              >
-                Search
-              </Link>
-            </li>
           </ul>
         </div>
       </div>
