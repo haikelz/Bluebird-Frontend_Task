@@ -69,7 +69,6 @@ In this test, I use:
 ├── __tests__
 │   ├── home
 │   ├── my-book
-│   ├── search
 │   ├── vehicle
 │   └── wishlist
 ├── tsconfig.json
@@ -78,7 +77,19 @@ In this test, I use:
 
 ## Screenshots
 
-Soon
+![ss 1](public/images/docs/ss-1.png)
+
+![ss 2](public/images/docs/ss-2.png)
+
+![ss 3](public/images/docs/ss-3.png)
+
+![ss 4](public/images/docs/ss-4.png)
+
+![ss 5](public/images/docs/ss-5.png)
+
+## Video
+
+[![video](public/images/docs/ss-1.png)](public/videos/2024-01-07%2017-47-35.mp4)
 
 ## Preview
 

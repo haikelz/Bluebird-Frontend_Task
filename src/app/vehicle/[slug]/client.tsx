@@ -93,8 +93,6 @@ export function HeartButton(
     const list = [...newData];
     list.push();
 
-    console.log(list);
-
     // setVehicles(list);
     localStorage.setItem("list", JSON.stringify(list));
   }

@@ -71,8 +71,6 @@ function TotalPrice({ book }: { book: CarTypeProps[] }) {
     book.map((item) => idrToNumber(item.price)).reduce((a, b) => a + b)
   );
 
-  console.log(book.map((item) => idrToNumber(item.price)));
-
   return (
     <Paragraph className="text-right">
       <span className="font-bold">Total Harga: </span>

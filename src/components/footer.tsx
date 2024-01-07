@@ -9,7 +9,7 @@ export default function Footer() {
     <footer
       className={cn(
         "w-full flex justify-center px-4 py-10",
-        "items-center border-t border-slate-300"
+        "items-center bg-[#2f5296] text-white"
       )}
     >
       <div
@@ -20,7 +20,7 @@ export default function Footer() {
       >
         <div className="w-full mt-6 md:mt-0 md:w-[400px]">
           <Image
-            src="/images/logo.png"
+            src="/images/logo.svg"
             width={150}
             height={150}
             alt="bluebird logo"
