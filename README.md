@@ -49,6 +49,7 @@ In this test, I use:
 ├── prettier.config.js
 ├── public
 │   └── images
+│       └── docs
 ├── README.md
 ├── src
 │   ├── app

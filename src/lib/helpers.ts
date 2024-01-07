@@ -5,4 +5,4 @@ export const toCamelCase = (str: string) =>
     .join(" ");
 
 export const idrToNumber = (str: string) =>
-  Number(str.split(" ")[1].replace(".", ""));
+  Number(str.split(" ")[1].split(".").join(""));

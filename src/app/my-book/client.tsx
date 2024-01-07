@@ -20,11 +20,11 @@ export default function Client() {
   }, [setBook]);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 mt-8">
       {book.length ? (
-        book.map((item) => (
-          <>
-            <Card key={item.vehicle} className="h-fit w-full">
+        <>
+          {book.map((item, index) => (
+            <Card key={index + 1} className="h-fit w-full">
               <CardContent className="flex flex-col md:flex-row justify-center items-start">
                 <Image
                   className={cn(
@@ -52,9 +52,9 @@ export default function Client() {
                 </div>
               </CardContent>
             </Card>
-            <TotalPrice book={book} />
-          </>
-        ))
+          ))}
+          <TotalPrice book={book} />
+        </>
       ) : (
         <Paragraph className="text-center mt-8 font-bold text-xl">
           Belum ada data!
@@ -71,8 +71,10 @@ function TotalPrice({ book }: { book: CarTypeProps[] }) {
     book.map((item) => idrToNumber(item.price)).reduce((a, b) => a + b)
   );
 
+  console.log(book.map((item) => idrToNumber(item.price)));
+
   return (
-    <Paragraph>
+    <Paragraph className="text-right">
       <span className="font-bold">Total Harga: </span>
       IDR {total}
     </Paragraph>

@@ -20,6 +20,7 @@ import { useAtom } from "jotai";
 import { HeartIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { toast } from "react-hot-toast";
 import slugify from "slugify";
 
 export default function Client({ vehicles }: { vehicles: ListVehiclesProps }) {
@@ -32,6 +33,7 @@ export default function Client({ vehicles }: { vehicles: ListVehiclesProps }) {
 
     setBook(data);
     localStorage.setItem("my-book", JSON.stringify(data));
+    toast("Kamu membooking kendaraan ini!", { duration: 2000 });
   }
 
   return (
@@ -133,8 +135,11 @@ export default function Client({ vehicles }: { vehicles: ListVehiclesProps }) {
                               }}
                               vehicles={vehicles}
                             />
-                            <Button onClick={() => handleBook(item)}>
-                              Book
+                            <Button
+                              onClick={() => handleBook(item)}
+                              className="font-bold"
+                            >
+                              Book now
                             </Button>
                           </div>
                         </CardFooter>

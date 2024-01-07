@@ -86,7 +86,8 @@ export default function Client(
 export function HeartButton(
   { data, vehicles }: { data: CarTypeProps; vehicles: ListVehiclesProps }
 ) {
-  /*function handleClick() {
+  /*
+   function handleClick() {
     const newData = vehicles.type.map((item) => item.car_type);
 
     const list = [...newData];
@@ -96,7 +97,8 @@ export function HeartButton(
 
     // setVehicles(list);
     localStorage.setItem("list", JSON.stringify(list));
-  }*/
+  }
+  */
 
   return (
     <button type="button" aria-label="like">
