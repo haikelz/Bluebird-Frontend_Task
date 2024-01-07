@@ -31,7 +31,7 @@ export default function Header() {
         <header
           ref={headerRef}
           className={cn(
-            "fixed z-50 top-0 bg-white border-b border-b-slate-300",
+            "fixed z-50 top-0 bg-[#2f5296]",
             "flex justify-center px-4 py-3 items-center",
             "w-full"
           )}
@@ -40,14 +40,14 @@ export default function Header() {
             <Link href="/">
               <button type="button" aria-label="home">
                 <Image
-                  src="/images/logo.png"
+                  src="/images/logo.svg"
                   alt="bluebird logo"
                   width={150}
                   height={150}
                 />
               </button>
             </Link>
-            <ul className="md:flex hidden space-x-8 justify-center items-center">
+            <ul className="md:flex text-white hidden space-x-8 justify-center items-center">
               <li>
                 <Link
                   href="/wishlist"
@@ -75,7 +75,12 @@ export default function Header() {
                 </Link>
               </li>
               <li>
-                <Input type="text" placeholder="Search...." />
+                <Input
+                  type="text"
+                  placeholder="Search...."
+                  className="text-black"
+                  onChange={(e) => setSearch(e.target.value)}
+                />
               </li>
             </ul>
             <div className="block md:hidden">

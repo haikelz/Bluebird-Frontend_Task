@@ -9,4 +9,4 @@ export const wishlistAtom = atom<LikedVehiclesAtomProps[]>([]);
 export const categoryAtom = atom<number>(1);
 export const searchAtom = atom<string>("");
 export const bookAtom = atom<CarTypeProps[]>([]);
-export const showAtom = atom<boolean>(false);
+export const showAtom = atom<boolean>(true);
